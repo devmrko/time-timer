@@ -73,16 +73,21 @@ export class ConditionComponent implements OnInit, OnDestroy {
 
     this.change.subscribe(() => {
       if (self.startBool) {
-        self.remainedMin = self.remainedMin - 1;
-        self.pieChartData = [
-          { data: [self.remainedMin, self.TOTAL_TIME - self.remainedMin] }
-        ];
+        if (this.remainedMin > 0) {
+          self.remainedMin = self.remainedMin - 1;
+          self.pieChartData = [
+            { data: [self.remainedMin, self.TOTAL_TIME - self.remainedMin] }
+          ];
+        } else if (this.remainedMin === 0) {
+          self.startBool = false;
+          alert('time is up!');
+        }
       }
     });
 
     setInterval(() => {
-      if (this.remainedMin > 0) {
-        this.change.emit(1);
+      if (this.remainedMin >= 0) {
+        this.change.emit();
       }
     }, 1000);
 
@@ -90,7 +95,7 @@ export class ConditionComponent implements OnInit, OnDestroy {
 
   start() {
     console.dir('start!');
-    if (this.startOver) {
+    if (this.startOver || this.remainedMin === 0) {
       this.remainedMin = this.minVal * 60;
       this.startOver = false;
     }
