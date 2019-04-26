@@ -20,6 +20,7 @@ export interface Minute {
 })
 export class ConditionComponent implements OnInit, OnDestroy {
 
+  setTime = 0;
   remainedMin = 0;
   startBool = false;
   startOver = false;
@@ -36,12 +37,13 @@ export class ConditionComponent implements OnInit, OnDestroy {
     animation: false
   };
 
-  pieChartLabels = ['time', ''];
+  pieChartLabels = ['time', '', ''];
 
   // CHART COLOR.
   pieChartColor: any = [
     {
       backgroundColor: ['rgb(255, 0, 0)',
+        'rgb(234, 186, 187)',
         'rgb(46, 66, 87)'
       ]
     }
@@ -49,7 +51,7 @@ export class ConditionComponent implements OnInit, OnDestroy {
 
   pieChartData: any = [
     {
-      data: [0, this.TOTAL_TIME]
+      data: [0, 0, this.TOTAL_TIME]
     }
   ];
 
@@ -76,7 +78,7 @@ export class ConditionComponent implements OnInit, OnDestroy {
         if (this.remainedMin > 0) {
           self.remainedMin = self.remainedMin - 1;
           self.pieChartData = [
-            { data: [self.remainedMin, self.TOTAL_TIME - self.remainedMin] }
+            { data: [self.remainedMin, this.setTime - self.remainedMin, self.TOTAL_TIME - self.remainedMin] }
           ];
         } else if (this.remainedMin === 0) {
           self.startBool = false;
@@ -97,6 +99,7 @@ export class ConditionComponent implements OnInit, OnDestroy {
     console.dir('start!');
     if (this.startOver || this.remainedMin === 0) {
       this.remainedMin = this.minVal * 60;
+      this.setTime = this.remainedMin;
       this.startOver = false;
     }
     this.startBool = true;
