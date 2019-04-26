@@ -78,7 +78,7 @@ export class ConditionComponent implements OnInit, OnDestroy {
         if (this.remainedMin > 0) {
           self.remainedMin = self.remainedMin - 1;
           self.pieChartData = [
-            { data: [self.remainedMin, this.setTime - self.remainedMin, self.TOTAL_TIME - self.remainedMin] }
+            { data: [self.remainedMin, this.setTime - self.remainedMin, self.TOTAL_TIME - this.setTime] }
           ];
         } else if (this.remainedMin === 0) {
           self.startBool = false;
