@@ -96,13 +96,17 @@ export class ConditionComponent implements OnInit, OnDestroy {
   }
 
   start() {
-    console.dir('start!');
-    if (this.startOver || this.remainedMin === 0) {
-      this.remainedMin = this.minVal * 60;
-      this.setTime = this.remainedMin;
-      this.startOver = false;
+    if (this.minVal === undefined) {
+      alert('please, select minute!');
+    } else {
+      console.dir('start!');
+      if (this.startOver || this.remainedMin === 0) {
+        this.remainedMin = this.minVal * 60;
+        this.setTime = this.remainedMin;
+        this.startOver = false;
+      }
+      this.startBool = true;
     }
-    this.startBool = true;
   }
 
   stop() {
