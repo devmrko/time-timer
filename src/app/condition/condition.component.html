@@ -1,5 +1,5 @@
 <h4>Time timer</h4>
-<mat-form-field>
+<mat-form-field style="width: 140px">
   <mat-label>set minute</mat-label>
   <mat-select [(value)]="minVal" (valueChange)="minChange()">
     <mat-option *ngFor="let m of minute" [value]="m.code">
