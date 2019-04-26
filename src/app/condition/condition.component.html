@@ -1,0 +1,27 @@
+<h4>Time timer</h4>
+<mat-form-field>
+  <mat-label>set minute</mat-label>
+  <mat-select [(value)]="minVal" (valueChange)="minChange()">
+    <mat-option *ngFor="let m of minute" [value]="m.code">
+      {{m.value}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="start()">start</button>
+<button mat-raised-button color="warn" (click)="stop()">stop</button>
+
+<p>
+  {{remainedMin}} seconds remains
+</p>
+
+<div class="chart-container">
+  <canvas
+      baseChart
+      [chartType]="'pie'"
+      [datasets]="pieChartData"
+      [options]="pieChartOptions"
+      [legend]="true"
+      [colors]="pieChartColor"
+      >
+  </canvas>
+</div>
